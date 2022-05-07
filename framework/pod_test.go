@@ -53,6 +53,10 @@ var _ = Describe("test pod", Label("pod"), func() {
 		Expect(e1).NotTo(HaveOccurred())
 		GinkgoWriter.Printf("get pod: %+v \n", getPod)
 
+		pods, e2 := f.GetPodList()
+		Expect(e2).NotTo(HaveOccurred())
+		GinkgoWriter.Printf("len of pods: %v", len(pods.Items))
+
 		e = f.DeletePod(podName, namespace)
 		Expect(e).NotTo(HaveOccurred())
 

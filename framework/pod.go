@@ -57,6 +57,15 @@ func (f *Framework) DeletePod(name, namespace string, opts ...client.DeleteOptio
 	return f.DeleteResource(pod, opts...)
 }
 
+func (f *Framework) GetPodList(opts ...client.ListOption) (*corev1.PodList, error) {
+	pods := &corev1.PodList{}
+	e := f.ListResource(pods, opts...)
+	if e != nil {
+		return nil, e
+	}
+	return pods, nil
+}
+
 func (f *Framework) GetPod(name, namespace string) (*corev1.Pod, error) {
 	pod := &corev1.Pod{
 		ObjectMeta: metav1.ObjectMeta{
